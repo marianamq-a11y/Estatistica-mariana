@@ -1,6 +1,8 @@
-# Modelos Probabilísticos Aplicados às Ciências dos Alimentos 🥦📊
+# Análise Estatística Aplicada ao Controle de Qualidade de Vinhos📊
 
-Este repositório contém o script e a documentação desenvolvidos para a **Tarefa 11**, abordando conceitos fundamentais de Probabilidade e Variáveis Aleatórias aplicados a cenários reais da indústria alimentícia, controle de qualidade, análise microbiológica e avaliação sensorial.
+Este repositório/notebook contém as instruções e os códigos necessários para reproduzir a análise estatística descritiva e inferencial aplicada ao banco de dados Wine Quality, focando no controle de qualidade na indústria alimentícia e enológica.
+
+O projeto explora o uso integrado das distribuições contínuas (Normal, t de Student, Qui-Quadrado e F de Fisher) para realizar inferências populacionais, avaliar a estabilidade de processos e comparar variabilidades entre lotes distintos (Vinho Tinto vs. Vinho Branco).
 
 ---
 
@@ -12,63 +14,67 @@ Este repositório contém o script e a documentação desenvolvidos para a **Tar
 
 ---
 
-## 🎯 Objetivo do Trabalho
-
-Demonstrar a aplicação prática de **Variáveis Aleatórias Discretas e Contínuas** e dos modelos probabilísticos de **Bernoulli**, **Binomial** e **Poisson** na resolução de problemas práticos do setor alimentício, utilizando Python para simulação, cálculo analítico e visualização gráfica de dados.
-
----
-
-## 📌 Conteúdos Abordados no Notebook
-
-1. **Variável Aleatória:** Definição formal e exemplificação na área de alimentos.
-2. **Variáveis Discretas vs. Contínuas:** Conceituação, classificação e 6 exemplos práticos justificadamente classificados.
-3. **Modelo de Bernoulli:** Caracterização de ensaios binários (sucesso/fracasso) aplicados à inspeção de embalagens.
-4. **Modelo Binomial:** Análise do número de sucessos em amostragem de tamanho fixo em testes de controle de qualidade e análise sensorial.
-5. **Modelo de Poisson:** Modelagem da contagem de eventos raros por unidade de área/tempo (análise microbiológica de superfícies).
-6. **Quadro Comparativo:** Síntese didática relacionando as três distribuições de probabilidade.
+## 📂 Conjunto de Dados (Dataset)
+Os dados utilizados pertencem ao Wine Quality Dataset (disponível no UCI Machine Learning Repository). O projeto requer os seguintes arquivos para a execução:
+- winequality-red.csv: Dados físico-químicos do vinho tinto (1599 instâncias)
+- winequality-white.csv: Dados físico-químicos do vinho branco (4898 instâncias).
 
 ---
 
-## 📁 Estrutura do Repositório
-tarefa11_variaveis_aleatorias_alimentos.ipynb: Arquivo principal do projeto contendo todo o código Python, os gráficos gerados e os textos explicativos em Markdown organizados em seções (Variável Aleatória, Discretas/Contínuas, Bernoulli, Binomial, Poisson e Comparação).
+## 🛠️️ Pré-requisitos e Bibliotecas
+Para executar a análise em um ambiente local (caso não utilize o Google Colab), é necessário ter o Python 3.7+ instalado, além das seguintes bibliotecas de Ciência de Dados:
 
-README.md: Documento de apresentação do projeto com título, integrantes em ordem alfabética, objetivos, instruções de instalação/execução, descrição das bibliotecas e referências bibliográficas consultadas.
+pip install pandas numpy scipy matplotlib
 
 ---
 
-## 💻 Instruções para Execução do Código
+## 📊 Estrutura da Análise
+A análise está dividida em quatro grandes módulos estatísticos, cada um respondendo a problemas específicos do chão de fábrica e do controle de qualidade:
+1. Distribuição Normal
+-  Objetivo: Estabelecer o modelo de referência e as especificações ideais do produto.
+-  Implementação: Cálculo da Função Densidade de Probabilidade (FDP) para o atributo pH, variação paramétrica ($\mu$ e $\sigma$), determinação de probabilidades (acumulada, intervalar, cauda) e cálculo de percentis com plotagem de áreas sombreadas.
+2. Distribuição t de Student
+- Objetivo: Avaliar hipóteses sobre a média amostral de características físico-químicas (como a acidez fixa) quando o desvio-padrão populacional é desconhecido
+- Implementação: Demonstração do comportamento das caudas pesadas em amostras reduzidas e acomodação da incerteza amostral.
+3. Distribuição Qui-Quadrado
+- Objetivo: Modelar e testar a variabilidade de medições individuais em um único processo (ex: oscilação do teor alcoólico no envasamento).
+- Implementação: Avaliação da atenuação da assimetria da curva com o aumento do tamanho da amostra (graus de liberdade).
+4. Distribuição F de Fisher
+- Objetivo: Comparar a variabilidade estatística entre duas linhas independentes.
+- Implementação: Teste de hipóteses comparando a variância da acidez fixa entre o grupo do Vinho Tinto ($df_1 = 1598$) e o Vinho Branco ($df_2 = 4897$), incluindo cálculos de percentil crítico ($P_{95}$) e visualização das zonas de aceitação/rejeição.
 
-### Pré-requisitos
-Certifique-se de ter o **Python 3.8+** e o ambiente **Jupyter Notebook** ou **VS Code** instalados.
+---
 
-### Passos:
-1. Clone este repositório para o seu computador:
-   ```bash
-   git clone [https://github.com/marianamq-a11y/Estatistica-mariana.git](https://github.com/marianamq-a11y/Estatistica-mariana)
-Acesse a pasta do projeto:
-cd Estatistica-mariana
+## 🚀 Como Reproduzir a Análise
+- Via Ambiente Local (Jupyter Notebook / Script Python)
+  1. Faça o download dos arquivos CSV e coloque-os na mesma pasta do seu script Python ou arquivo .ipynb.
+  2. Copie os blocos de código gerados ao longo deste projeto referentes aos gráficos da Distribuição Normal e F de Fisher.
+  3. Execute o script sequencialmente. O código buscará automaticamente os arquivos .csv no diretório raiz ou subpastas por meio do módulo os.
+  4. Os gráficos serão gerados interativamente via matplotlib.pyplot.show().
 
-Instale as bibliotecas necessárias: pip install numpy pandas matplotlib scipy
-
-Inicie o Jupyter Notebook: jupyter notebook tarefa11_variaveis_aleatorias_alimentos.ipynb
-
-Execute todas as células do notebook sequencialmente (Shift + Enter).
+---
 
 
 ## 🛠️ Bibliotecas Utilizadas
-numpy: Operações numéricas e manipulação de vetores.
+pandas: Utilizada para a leitura, estruturação e manipulação dos bancos de dados em formato CSV (pd.read_csv), bem como para o cálculo das variâncias e médias diretamente das colunas (ex: df['pH'].mean()).
 
-pandas: Organização e visualização de dados em tabelas comparativas.
+scipy (especificamente o módulo scipy.stats): O motor estatístico do projeto. Forneceu as funções para trabalhar com as distribuições teóricas (Normal, F de Fisher, etc.), permitindo calcular a densidade de probabilidade (pdf), probabilidades acumuladas (cdf), probabilidades de cauda (sf) e percentis críticos (ppf).
 
-scipy.stats: Cálculo exato de funções de probabilidade (PMF e CDF) para distribuições estatísticas.
+numpy: Empregada para a geração de arrays e sequências numéricas (através da função np.linspace), essenciais para definir o eixo horizontal (X) na plotagem das curvas contínuas.
 
-matplotlib: Geração de gráficos explicativos e diagramas de probabilidade.
+matplotlib (especificamente matplotlib.pyplot): Responsável pela criação e formatação de todos os gráficos, permitindo desenhar as curvas, criar múltiplos painéis (subplots) e colorir as áreas sombreadas sob a curva de probabilidade (fill_between).
+
+os e zipfile: Bibliotecas nativas da linguagem utilizadas para interagir com o sistema de arquivos, extrair a base de dados do arquivo ZIP e localizar os arquivos CSV de forma automática, evitando erros de caminho de diretório.
+
+---
 
 ## 📚 Referências Bibliográficas e Fontes de Dados
-MAGALHÃES, Marcos Nascimento; LIMA, Antonio Carlos Pedroso de. Noções de Probabilidade e Estatística. 7. ed. São Paulo: EDUSP, 2015.
+https://archive.ics.uci.edu/dataset/186/wine+quality
 
-MONTGOMERY, Douglas C.; RUNGER, George C. Estatística Aplicada e Probabilidade para Engenheiros. 6. ed. Rio de Janeiro: LTC, 2016.
+https://www.inf.ufsc.br/~andre.zibetti/probabilidade/normal.html
 
-ROSS, Sheldon. A First Course in Probability. 9th ed. Pearson, 2014.
+BUSSAB, Wilton de O.; MORETTIN, Pedro A. Estatística Básica. 9. ed. São Paulo: Saraiva, 2017.
 
-ANVISA - Agência Nacional de Vigilância Sanitária. Instrução Normativa N° 161, de 1º de julho de 2022. Estabelece os padrões microbiológicos para alimentos. Disponível em: https://www.in.gov.br/.
+CORTEZ, Paulo; CERDEIRA, António; ALMEIDA, Fernando; MATOS, Telmo; REIS, José. Wine Quality. UCI Machine Learning Repository, 2009.
+
+MONTGOMERY, Douglas C.; RUNGER, George C. Estatística Aplicada e Probabilidade para Engenheiros. 7. ed. Rio de Janeiro: LTC, 2018.)
